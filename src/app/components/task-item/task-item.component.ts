@@ -14,12 +14,29 @@ import { CommonModule } from '@angular/common';
 export class TaskItemComponent {
 @Input() task?: Task;
 @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
+@Output() onToggleReminder: EventEmitter<Task> = new EventEmitter();
 faTimes = faTimes;
+
+ngOnInit() {
+  console.log("Task received in TaskItemComponent:", this.task); // Check if task is received
+}
+
 
 onDelete(task?: Task) {
   if (task) {
     this.onDeleteTask.emit(task);
   }
 }
+
+onToggle(task?: Task) {
+  console.log("Double-click event received");
+  if (task) {
+    console.log("Toggle event emitted with task:", task); 
+    this.onToggleReminder.emit(task);
+    console.log(task.reminder);
+  }
+}
+
+
 }
 
